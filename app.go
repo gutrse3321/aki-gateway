@@ -1,6 +1,7 @@
 package akigate
 
 import (
+	"akigate/reverseProxy"
 	"akigate/route"
 	"github.com/google/wire"
 	"github.com/gutrse3321/aki/pkg/app"
@@ -42,5 +43,6 @@ func NewApp(opt *app.Options, logger *zap.Logger, httpServer *akihttp.Server) (*
 var WireSet = wire.NewSet(
 	NewApp,
 	NewOptions,
+	reverseProxy.NewReverseProxy,
 	route.WireSet,
 )

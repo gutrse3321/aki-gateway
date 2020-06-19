@@ -15,12 +15,15 @@ import (
  */
 
 func CreateInitControllersFn(entry *Entry) httpServer.InitControllers {
-	return func(r *gin.Engine) {
-		r.POST("/*entry", entry.In)
+	return func(g *gin.RouterGroup) {
+		g.POST("/*entry", entry.In)
+		//g.POST("/test", entry.Test)
 	}
 }
 
 var WireSet = wire.NewSet(
+	NewRoutesOption,
+	NewRoutesMap,
 	NewEntry,
 	CreateInitControllersFn,
 )

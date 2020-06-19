@@ -7,6 +7,7 @@ package main
 
 import (
 	"akigate"
+	"akigate/reverseProxy"
 	"akigate/route"
 	"github.com/google/wire"
 	"github.com/gutrse3321/aki/pkg/app"
@@ -38,7 +39,13 @@ func CreateApp(configPath string) (*app.Application, error) {
 	if err != nil {
 		return nil, err
 	}
-	entry := route.NewEntry()
+	reverseProxyReverseProxy := reverseProxy.NewReverseProxy()
+	routesOption, err := route.NewRoutesOption(viper)
+	if err != nil {
+		return nil, err
+	}
+	routesMap := route.NewRoutesMap(routesOption)
+	entry := route.NewEntry(reverseProxyReverseProxy, routesMap)
 	initControllers := route.CreateInitControllersFn(entry)
 	engine := http.NewRouter(httpOptions, logger, initControllers)
 	server, err := http.New(httpOptions, logger, engine)
