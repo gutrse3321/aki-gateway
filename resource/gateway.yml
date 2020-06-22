@@ -7,6 +7,21 @@ app:
     app: http://localhost:3000
     uaa: http://localhost:5000
 
+oauth:
+  accessTokenExp: 12 # hour
+  refreshTokenExp: 720 # hour
+  redisOptions:
+    addr: 207.148.105.249:6379
+    password: 123456
+    db: 1
+  clients:
+    -
+      id: "app"
+      secret: "aki"
+    -
+      id: "bbs"
+      secret: "aki"
+
 log:
   filename: logtmp/gateway.log
   maxSize: 500

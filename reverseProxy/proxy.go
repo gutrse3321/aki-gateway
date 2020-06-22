@@ -52,13 +52,13 @@ func (r *ReverseProxy) InitProxy() *httputil.ReverseProxy {
 			Renegotiation:      tls.RenegotiateFreelyAsClient,
 		},
 		DialContext: (&net.Dialer{
-			Timeout:   60 * time.Second,
-			KeepAlive: 60 * time.Second,
+			Timeout:   300 * time.Second,
+			KeepAlive: 300 * time.Second,
 		}).DialContext,
-		TLSHandshakeTimeout:   60 * time.Second,
-		ResponseHeaderTimeout: 60 * time.Second,
-		ExpectContinueTimeout: 30 * time.Second,
-		IdleConnTimeout:       60 * time.Second,
+		TLSHandshakeTimeout:   300 * time.Second,
+		ResponseHeaderTimeout: 300 * time.Second,
+		ExpectContinueTimeout: 150 * time.Second,
+		IdleConnTimeout:       300 * time.Second,
 		Proxy:                 http.ProxyFromEnvironment,
 	}
 	proxy.Transport = trans

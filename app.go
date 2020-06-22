@@ -1,6 +1,8 @@
 package akigate
 
 import (
+	"akigate/filter"
+	"akigate/oauth/auth"
 	"akigate/reverseProxy"
 	"akigate/route"
 	"github.com/google/wire"
@@ -44,5 +46,7 @@ var WireSet = wire.NewSet(
 	NewApp,
 	NewOptions,
 	reverseProxy.NewReverseProxy,
+	auth.WireSet,
+	filter.UserAuthMiddleware,
 	route.WireSet,
 )
